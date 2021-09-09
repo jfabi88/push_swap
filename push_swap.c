@@ -54,13 +54,13 @@ void	ft_copy_list(t_numlist *lista, t_numlist **listb)
 	ft_numlstadd_back(listb, temp);
 }
 
-void	ft_create_list(t_numlist **lst, t_numlist **blst, int argc, char **argv)
+static void	ft_c_lst(t_numlist **lst, t_numlist **blst, int argc, char **argv)
 {
 	t_numlist	*temp;
 	int			i;
 	int			data;
 
-	i = 1;
+	i = 0;
 	while (i < argc)
 	{	
 		data = ft_atoi(argv[i]);
@@ -72,61 +72,38 @@ void	ft_create_list(t_numlist **lst, t_numlist **blst, int argc, char **argv)
 	}
 }
 
-void	ft_control(int argc, char **argv)
+void	ft_create_list(t_numlist **lst, t_numlist **blst, int argc, char **argv)
 {
-	int	i;
-	int	j;
+	char	**mtx;
 
-	i = 1;
-	while(i < argc)
+	if (argc == 2)
 	{
-		j = 0;
-		while (argv[i][j])
-		{
-			if (!ft_isdigit(argv[i][j]))
-				ft_error(1);
-			j++;
-		}
-		i++;
+		mtx = ft_split(argv[1], ' ');
+		if (mtx)
+			ft_c_lst(lst, blst, ft_mtx_size(mtx), mtx);
+		ft_free_mtx(mtx);
 	}
-}
-
-void	ft_double_control(t_numlist *list)
-{
-	t_numlist	*cpy;
-
-	while (list->next != 0)
-	{
-		cpy  = list->next;
-		while (cpy->next != 0)
-		{
-			if (cpy->content == list->content)
-				ft_error(2);
-			cpy = cpy->next;
-		}
-		if (cpy->content == list->content)
-			ft_error(2);
-		list = list->next;
-	}
+	else
+		ft_c_lst(lst, blst, argc - 1, argv + 1);
 }
 
 int	main(int argc, char **argv)
 {
-	t_numlist	**lista;
-	t_numlist	**listb;
+	t_numlist	*lista;
+	t_numlist	*listb;
 	int			size;
 	int			flag;
 	int			*ret;
 
-	lista = malloc(sizeof(t_numlist **));
-	listb = malloc(sizeof(t_numlist **));
-	*lista = 0;
-	*listb = 0;
+	lista = NULL;
+	listb = NULL;
 	ft_control(argc, argv);
-	ft_create_list(lista, listb, argc, argv);
-	ft_double_control(*lista);
-	size = ft_numlist_size(*lista);
-	ret = ft_find_sequence(*lista, size);
+	ft_create_list(&lista, &listb, argc, argv);
+	ft_double_control(lista);
+	size = ft_numlist_size(lista);
+	ft_print_list(lista, "La lista A è");
+	ft_printf("Ciao\n");
+	//ret = ft_find_sequence(lista, size);
 	//if (size >= 4 && size <= 5)
 	//	ft_push_swap_5(lista, listb);
 	//if (size > 5 && size <= 100)

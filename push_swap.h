@@ -29,7 +29,7 @@ typedef struct s_vec2
 	int size;
 }				t_vec2;
 
-void		ft_error(int nmb);
+int		ft_error(int nmb);
 
 /* utils */
 
@@ -42,11 +42,18 @@ void		ft_numlist_remove_if(t_numlist **begin_list, int num);
 void		ft_print_list(t_numlist *list, char *str);				//delete
 int			ft_find_numlast(t_numlist *list);
 t_numlist	*ft_copy_list2(t_numlist *list);
+void		ft_free_lst(t_numlist *lst);
+int			ft_mtx_size(char **mtx);
+void		ft_free_mtx(char **mtx);
 
 /* cheker */
 
 void	ft_cheker(t_numlist **lista, t_numlist **listb);
 void	ft_change_list(t_numlist **lista, t_numlist **listb, char *str);
+
+/* control */
+void	ft_double_control(t_numlist *list);
+int		ft_control(int argc, char **argv);
 
 /* push_swap */
 

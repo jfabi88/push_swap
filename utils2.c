@@ -59,3 +59,40 @@ t_numlist	*ft_copy_list2(t_numlist *list)
 	}
 	return (cpy);
 }
+
+void	ft_free_lst(t_numlist *lst)
+{
+	t_numlist	*pointer;
+
+	while(lst)
+	{
+		pointer = lst->next;
+		free(lst);
+		lst = pointer;
+	}
+}
+
+int	ft_mtx_size(char **mtx)
+{
+	int	i;
+
+	i = 0;
+	if (mtx == NULL)
+		return (-1);
+	while (mtx[i])
+		i++;
+	return (i);
+}
+
+void	ft_free_mtx(char **mtx)
+{
+	int	i;
+
+	i = 0;
+	while (mtx && mtx[i])
+	{
+		free(mtx[i]);
+		i++;
+	}
+	free(mtx);
+}

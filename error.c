@@ -12,20 +12,20 @@
 
 #include "push_swap.h"
 
-void	ft_error1(int nmb)
+static void	ft_error1(int nmb)
 {
 	if (nmb == 0)
-		printf("Errore nella gestione della malloc\n");
+		ft_putendl_fd("Errore nella gestione della malloc", 2);
 	if (nmb == 1)
-		printf("I parametri passati non sono corretti\n");
+		ft_putendl_fd("I parametri passati non sono corretti", 2);
 	if (nmb == 2)
-		printf("Dei numeri sono ripetuti due volte\n");
+		ft_putendl_fd("Dei numeri sono ripetuti due volte", 2);
 }
 
-void	ft_error(int nmb)
+int	ft_error(int nmb)
 {
 	if (nmb >= 0 && nmb < 5)
 		ft_error1(nmb);
 	/* free */
-	exit(1);
+	exit (-1);
 }
