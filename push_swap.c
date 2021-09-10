@@ -14,7 +14,6 @@
 
 int	ft_isorder(t_numlist *list)
 {
-	//ft_print_list(list);			//delete
 	while (list->next != 0)
 	{
 		if ((int)(list->next->content) < (int)(list->content))
@@ -92,7 +91,6 @@ int	main(int argc, char **argv)
 	t_numlist	*lista;
 	t_numlist	*listb;
 	int			size;
-	int			*trasl;
 
 	lista = NULL;
 	listb = NULL;
@@ -100,18 +98,9 @@ int	main(int argc, char **argv)
 	ft_create_list(&lista, &listb, argc, argv);
 	ft_double_control(lista);
 	size = ft_numlist_size(lista);
-	//ft_print_list(lista, "La lista A è");
-	//ret = ft_find_sequence(lista, size);
 	if (size >= 2 && size <= 5)
 		ft_push_swap_5(&lista, &listb);
-	ft_print_list(lista, "lista");	
-	trasl = ft_trasform(lista);
-	//if (size > 5 && size <= 100)
-	//	ft_push_swap_100(lista, listb);
-	//ft_cheker(&lista, &listb);
-	ft_print_list(lista, "lista");						//delete
-	ft_print_list(listb, "listb");						//delete
-	ft_traslate(lista, trasl);
-	ft_print_list(lista, "lista");
+	else
+		ft_push_swap_500(&lista, &listb);
 	ft_conclusion(ft_isorder(lista), listb);
 }

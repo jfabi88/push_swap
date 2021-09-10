@@ -1,16 +1,13 @@
 #include "push_swap.h"
 
-void    ft_change_number(t_numlist *list, int now, int after)
+void    ft_change_number(t_numlist *list, int *trasl)
 {
-    while (list)
-    {
-        if (list->content == now)
-        {
-            list->content = after;
-            return ;
-        }
-        list = list->next;
-    }
+    int i;
+
+    i = 0;
+    while (trasl[i] != list->content)
+        i++;
+    list->content = i;
 }
 
 void    ft_trasl_list(t_numlist *list, int *trasl)
@@ -20,11 +17,10 @@ void    ft_trasl_list(t_numlist *list, int *trasl)
 
     size = ft_numlist_size(list);
     i = 0;
-    while (i < size)
+    while (list)
     {
-        ft_change_number(list, trasl[i], i);
-        ft_print_list(list, "Lista nel ciclo while");
-        i++;
+        ft_change_number(list, trasl);
+        list = list->next;
     }
 }
 
@@ -75,8 +71,8 @@ void    ft_traslate(t_numlist *lista, int *trasl)
     size = ft_numlist_size(lista);
     while (i < size)
     {
-        printf("La i è: %d mentra trasl[i] é : %d\n", i, trasl[i]);
-        ft_change_number(lista, i, trasl[i]);
+        lista->content = trasl[lista->content];
+        lista = lista->next;
         i++;
     }
 }

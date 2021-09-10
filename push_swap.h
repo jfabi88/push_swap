@@ -75,6 +75,9 @@ int		ft_find_best_way(t_numlist *list, int num);
 void	ft_change_down(t_numlist **lista, t_numlist **listb);
 void	ft_change_up(t_numlist **lista, t_numlist **listb);
 
+/* push_swap_500 */
+void    ft_push_swap_500(t_numlist **lista, t_numlist **listb);
+
 /* sottosequenza */
 
 int *ft_find_sequence(t_numlist *list, int num);
