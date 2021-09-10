@@ -13,6 +13,7 @@ SRCS	=	\
 			push_swap.c \
 			reorder_down.c \
 			sottosequenza.c \
+			trasform.c \
 			utils.c \
 			utils2.c
 

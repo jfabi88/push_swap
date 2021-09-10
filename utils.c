@@ -84,11 +84,15 @@ void	ft_print_list(t_numlist *list, char *str)					//delete
 {
 	if (str != 0)
 		printf("%s: ", str);
-	while (list->next != 0)
+	if (list)
 	{
+		while (list->next != 0)
+		{
+			printf("%d", list->content);
+			printf(", ");
+			list = list->next;
+		}
 		printf("%d", list->content);
-		printf(", ");
-		list = list->next;
 	}
-	printf("%d\n", list->content);
+	printf("\n");
 }

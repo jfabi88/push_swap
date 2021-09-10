@@ -78,4 +78,9 @@ void	ft_change_up(t_numlist **lista, t_numlist **listb);
 /* sottosequenza */
 
 int *ft_find_sequence(t_numlist *list, int num);
+
+/* trasform */
+int		*ft_trasform(t_numlist *list);
+void    ft_traslate(t_numlist *lista, int *trasl);
+
 #endif

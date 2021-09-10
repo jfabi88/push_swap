@@ -1,29 +1,59 @@
 #include "push_swap.h"
 
+static int	ft_is_valid_nmb(char *str, int *j)
+{
+	int	flag;
+
+	if (ft_isdigit(str[*j]))
+		return (1);
+	else if (str[*j] == '-' || str[*j] == '+')
+	{
+		flag = 1;
+		if (str[*j] == '-')
+			flag = 2;
+		(*j)++;
+		if (!ft_isdigit(str[*j]))
+			return (-1);
+		return (flag);
+	}
+	return (-1);
+}
+
+static int	ft_control_str(char *str)
+{
+	int	i;
+	int	num;
+	int	val;
+	int	sgn;
+
+	i = 0;
+	num = 0;
+	while (str[i])
+	{
+		sgn = ft_is_valid_nmb(str, &i);
+		if (sgn == -1)
+			return (ft_error(1));
+		val = str[i] - 48;
+		if (num >= 0 && (2147483647 - val) / 10 < num)
+			return (ft_error(1));
+		else if (num < 0 && (-2147483648 + val) / 10 > num)
+			return (ft_error(1));
+		if (sgn == 2 || num < 0)
+			num = (num * 10) - val;
+		else
+			num = (num * 10) + val;
+		i++;
+	}
+}
+
 static int	ft_control_int(int argc, char **argv)
 {
 	int	i;
-	int	j;
-	int	num;
-	int val;
 
 	i = 0;
 	while (i < argc)
 	{
-		j = 0;
-		num = 0;
-		while (argv[i][j])
-		{
-			if (!ft_isdigit(argv[i][j]))
-				return (ft_error(1));
-			val = ft_atoi(&argv[i][j]);
-			if ((long int)(2147483647 - val) < num)
-				return (ft_error(1));
-			if ((long int)(-2147483648 - val) > num)
-				return (ft_error(1));
-			num += val;
-			j++;
-		}
+		ft_control_str(argv[i]);
 		i++;
 	}
 	return (1);
@@ -33,7 +63,7 @@ int ft_control(int argc, char **argv)
 {
     char    **mtx;
 
-    if (argc == 1)
+    if (argc < 2)
         exit (1);
 	if (argc == 2)
     {
