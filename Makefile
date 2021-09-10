@@ -1,22 +1,19 @@
 NAME	= push_swap
 
 SRCS	=	\
-			checker.c \
-			control.c \
-			error.c \
 			gnl/get_next_line_utils.c \
 			gnl/get_next_line.c \
-			push_swap_5.c \
-			push_swap_100.c \
-			push_swap_500.c \
-			push_swap_utils.c \
-			push_swap_utils2.c \
-			push_swap.c \
-			reorder_down.c \
-			sottosequenza.c \
-			trasform.c \
-			utils.c \
-			utils2.c
+			srcs/checker.c \
+			srcs/control.c \
+			srcs/create_list.c \
+			srcs/error.c \
+			srcs/numlist_utils.c \
+			srcs/numlist.c \
+			srcs/push_swap_5.c \
+			srcs/push_swap_500.c \
+			srcs/push_swap.c \
+			srcs/trasform.c \
+			srcs/utils.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -28,7 +25,7 @@ CFLAGS	= -Wall -Wextra -Werror
 $(NAME):	$(OBJS)
 			make -C libft
 			mv libft/libft.a .
-			gcc $(OBJS) libft.a -o $(NAME)
+			gcc $(CFLAGS) $(OBJS) libft.a -o $(NAME)
 
 all:		$(NAME)
 
@@ -36,7 +33,7 @@ clean:
 			rm -f $(OBJS)
 			make -C libft clean
 
-fclean:		clean clean_bonus
+fclean:		clean
 			rm -f $(NAME_BONUS)
 			rm -f $(NAME) libft.a
 

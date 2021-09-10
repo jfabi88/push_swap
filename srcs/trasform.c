@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void    ft_change_number(t_numlist *list, int *trasl)
+static void    ft_change_number(t_numlist *list, int *trasl)
 {
     int i;
 
@@ -10,7 +10,7 @@ void    ft_change_number(t_numlist *list, int *trasl)
     list->content = i;
 }
 
-void    ft_trasl_list(t_numlist *list, int *trasl)
+static void    ft_trasl_list(t_numlist *list, int *trasl)
 {
     int size;
     int i;
@@ -24,7 +24,7 @@ void    ft_trasl_list(t_numlist *list, int *trasl)
     }
 }
 
-int *ft_create_trasl(t_numlist *list)
+static int *ft_create_trasl(t_numlist *list)
 {
     t_numlist   *cpy;
     int         *trasl;

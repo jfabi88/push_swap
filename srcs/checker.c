@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void static	ft_change_list4(t_numlist **lista, t_numlist **listb, char *str)
+static void	ft_change_list4(t_numlist **lista, t_numlist **listb, char *str)
 {
 	t_numlist	*temp;
 	int			data;
@@ -41,7 +41,7 @@ void static	ft_change_list4(t_numlist **lista, t_numlist **listb, char *str)
 	printf("%s\n", str);
 }
 
-void static	ft_change_list3(t_numlist **lista, t_numlist **listb, char *str)
+static void	ft_change_list3(t_numlist **lista, t_numlist **listb, char *str)
 {
 	t_numlist	*temp;
 	int			data;
@@ -71,7 +71,7 @@ void static	ft_change_list3(t_numlist **lista, t_numlist **listb, char *str)
 	ft_change_list4(lista, listb, str);
 }
 
-void static	ft_change_list2(t_numlist **lista, t_numlist **listb, char *str)
+static void	ft_change_list2(t_numlist **lista, t_numlist **listb, char *str)
 {
 	int			data;
 	t_numlist	*temp;

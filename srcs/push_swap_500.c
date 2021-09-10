@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void    ft_sort(t_numlist **lista, t_numlist **listb, int index)
+static void    ft_sort(t_numlist **lista, t_numlist **listb, int index)
 {
     int size;
 
@@ -17,7 +17,7 @@ void    ft_sort(t_numlist **lista, t_numlist **listb, int index)
         ft_change_list(lista, listb, "pa");
 }
 
-int ft_len_i(t_numlist *lista)
+static int ft_len_i(t_numlist *lista)
 {
     int size;
     int ret;
@@ -32,7 +32,7 @@ int ft_len_i(t_numlist *lista)
     return (ret);
 }
 
-void    ft_sort_500(t_numlist **lista, t_numlist **listb)
+static void    ft_sort_500(t_numlist **lista, t_numlist **listb)
 {
     int n_i;
     int i;

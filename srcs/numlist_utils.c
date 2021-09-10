@@ -12,6 +12,47 @@
 
 #include "push_swap.h"
 
+t_numlist	*ft_copy_list2(t_numlist *list)
+{
+	t_numlist	*temp;
+	t_numlist	*cpy;
+
+	cpy = 0;
+	while (list != 0)
+	{
+		temp = ft_numlstnew(list->content);
+		if (temp == 0)
+			ft_error(0);
+		ft_numlstadd_back(&cpy, temp);
+		list = list->next;
+	}
+	return (cpy);
+}
+
+void	ft_numlist_remove_if(t_numlist **begin_list, int num)
+{
+	t_numlist	*list;
+	t_numlist	*tmp;
+
+	list = *begin_list;
+	while (list && list->next)
+	{
+		if (list->next->content == num)
+		{
+			tmp = list->next;
+			list->next = tmp->next;
+			free(tmp);
+		}
+		list = list->next;
+	}
+	list = *begin_list;
+	if (list && list->content == num)
+	{
+		*begin_list = list->next;
+		free(list);
+	}
+}
+
 int	ft_find_max(t_numlist *list)
 {
 	int ret;
@@ -57,17 +98,4 @@ int ft_find_index(t_numlist *list, int data)
 		i++;
 	}
 	return (i);
-}
-
-int ft_is_ingroup(t_numlist *group, int data)
-{
-	while (group->next)
-	{
-		if (group->content == data)
-			return (1);
-		group = group->next;
-	}
-	if (group->content == data)
-		return (1);
-	return (0);
 }
