@@ -79,20 +79,3 @@ t_numlist	*ft_numlstnew(int content)
 	diz->next = 0;
 	return (diz);
 }
-
-void	ft_print_list(t_numlist *list, char *str)					//delete
-{
-	if (str != 0)
-		printf("%s: ", str);
-	if (list)
-	{
-		while (list->next != 0)
-		{
-			printf("%d", list->content);
-			printf(", ");
-			list = list->next;
-		}
-		printf("%d", list->content);
-	}
-	printf("\n");
-}

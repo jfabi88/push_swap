@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-static void ft_third_step(t_numlist **lista, t_numlist **listb)
+static void	ft_third_step(t_numlist **lista, t_numlist **listb)
 {
-	int index_min;
+	int	index_min;
 	int	index_max;
 
 	index_min = ft_find_index(*lista, ft_find_min(*lista));
@@ -37,9 +37,9 @@ static void ft_third_step(t_numlist **lista, t_numlist **listb)
 		ft_change_list(lista, listb, "rra");
 }
 
-static void ft_second_step(t_numlist **lista, t_numlist **listb, int max)
+static int	ft_second_step(t_numlist **lista, t_numlist **listb, int max)
 {
-	int index;
+	int	index;
 
 	index = ft_find_index(*lista, max);
 	if (index == 1)
@@ -53,10 +53,10 @@ static void ft_second_step(t_numlist **lista, t_numlist **listb, int max)
 		ft_change_list(lista, listb, "rra");
 	else if (index == 3)
 		ft_change_list(lista, listb, "rra");
-	ft_change_list(lista, listb, "pb");
+	return (ft_change_push(lista, listb, "pb"));
 }
 
-static void ft_first_step(t_numlist **lista, t_numlist **listb, int min)
+static int	ft_first_step(t_numlist **lista, t_numlist **listb, int min)
 {
 	int	index;
 	int	i;
@@ -80,26 +80,30 @@ static void ft_first_step(t_numlist **lista, t_numlist **listb, int min)
 	}
 	else if (index == 4)
 		ft_change_list(lista, listb, "rra");
-	ft_change_list(lista, listb, "pb");
+	return (ft_change_push(lista, listb, "pb"));
 }
 
-void ft_push_swap_5(t_numlist **lista, t_numlist **listb)
+void	ft_push_swap_5(t_numlist **lista, t_numlist **listb)
 {
-	int min;
-	int max;
+	int	min;
+	int	max;
 	int	start_size;
 
 	start_size = ft_numlist_size(*lista);
-	if ( start_size >= 4)
+	if (start_size >= 4)
 	{
 		min = ft_find_min(*lista);
 		max = ft_find_max(*lista);
-		ft_first_step(lista, listb, min);
-		ft_second_step(lista, listb, max);
+		if (ft_first_step(lista, listb, min) == -1)
+			ft_free_exit(*lista, *listb);
+		if (ft_second_step(lista, listb, max) == -1)
+			ft_free_exit(*lista, *listb);
 		ft_third_step(lista, listb);
-		ft_change_list(lista, listb, "pa");
+		if (ft_change_push(lista, listb, "pa") == -1)
+			ft_free_exit(*lista, *listb);
 		ft_change_list(lista, listb, "ra");
-		ft_change_list(lista, listb, "pa");
+		if (ft_change_push(lista, listb, "pa") == -1)
+			ft_free_exit(*lista, *listb);
 	}
 	else
 		ft_third_step(lista, listb);

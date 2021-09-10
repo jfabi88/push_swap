@@ -15,17 +15,16 @@
 static void	ft_error1(int nmb)
 {
 	if (nmb == 0)
-		ft_putendl_fd("Errore nella gestione della malloc", 2);
+		ft_putendl_fd("Error", 2);
 	if (nmb == 1)
-		ft_putendl_fd("I parametri passati non sono corretti", 2);
+		ft_putendl_fd("Error", 2);
 	if (nmb == 2)
-		ft_putendl_fd("Dei numeri sono ripetuti due volte", 2);
+		ft_putendl_fd("Error", 2);
 }
 
 int	ft_error(int nmb)
 {
 	if (nmb >= 0 && nmb < 5)
 		ft_error1(nmb);
-	/* free */
-	exit (-1);
+	return (-1);
 }

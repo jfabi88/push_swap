@@ -14,7 +14,7 @@
 
 static int	ft_isorder(t_numlist *list)
 {
-	while (list->next != 0)
+	while (list && list->next != 0)
 	{
 		if ((int)(list->next->content) < (int)(list->content))
 			return (0);
@@ -25,10 +25,8 @@ static int	ft_isorder(t_numlist *list)
 
 static void	ft_conclusion(int bool, t_numlist *listb)
 {
-	if (bool == 1 && listb == 0)
-		write(1, "OK\n", 3);
-	else
-		write(1, "KO\n", 3);
+	if (bool != 1 || listb != 0)
+		write(1, "Error\n", 6);
 	return ;
 }
 
@@ -44,10 +42,17 @@ int	main(int argc, char **argv)
 	ft_control(argc, argv);
 	ft_create_list(&lista, &listb, argc, argv);
 	ft_double_control(lista);
+	if (ft_isorder(lista) == 1)
+	{
+		ft_free_exit(lista, listb);
+		return(1);
+	}
 	size = ft_numlist_size(lista);
 	if (size >= 2 && size <= 5)
 		ft_push_swap_5(&lista, &listb);
-	else
+	else if (size > 5)
 		ft_push_swap_500(&lista, &listb);
 	ft_conclusion(ft_isorder(lista), listb);
+	ft_free_lst(lista);
+	ft_free_lst(listb);
 }

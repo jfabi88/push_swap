@@ -44,6 +44,7 @@ static int	ft_control_str(char *str)
 			num = (num * 10) + val;
 		i++;
 	}
+	return (1);
 }
 
 static int	ft_control_int(int argc, char **argv)
@@ -53,27 +54,44 @@ static int	ft_control_int(int argc, char **argv)
 	i = 0;
 	while (i < argc)
 	{
-		ft_control_str(argv[i]);
+		if (ft_control_str(argv[i]) == -1)
+			return (-1);
 		i++;
 	}
 	return (1);
 }
 
-int ft_control(int argc, char **argv)
+int	ft_control(int argc, char **argv)
 {
-    char    **mtx;
+	char	**mtx;
+	int		num;
+	int		i;
 
-    if (argc < 2)
-        exit (1);
+	i = 0;
+	if (argc < 2)
+		exit (1);
 	if (argc == 2)
-    {
-        mtx = ft_split(argv[1], ' ');
-        if (mtx)
-		    return (ft_control_int(ft_mtx_size(mtx), mtx));
-        ft_free_mtx(mtx);
-    }
+	{
+		while (argv[1][i] == ' ')
+			i++;
+		if (argv[1][i] == 0)
+			exit (1);
+		mtx = ft_split(argv[1], ' ');
+		if (mtx == NULL)
+			exit(1);
+		if (mtx)
+			num = ft_control_int(ft_mtx_size(mtx), mtx);
+		ft_free_mtx(mtx);
+		if (num == -1)
+			exit(1);
+		return (1);
+	}
 	else
-		return (ft_control_int(argc - 1, argv + 1));
+	{
+		if (ft_control_int(argc - 1, argv + 1) == -1)
+			exit(-1);
+		return (1);
+	}
 }
 
 void	ft_double_control(t_numlist *list)
@@ -84,20 +102,20 @@ void	ft_double_control(t_numlist *list)
 	start = list;
 	while (list->next != 0)
 	{
-		cpy  = list->next;
+		cpy = list->next;
 		while (cpy->next != 0)
 		{
 			if (cpy->content == list->content)
 			{
 				ft_free_lst(start);
-				ft_error(2);
+				exit(ft_error(2));
 			}
 			cpy = cpy->next;
 		}
 		if (cpy->content == list->content)
 		{
 			ft_free_lst(start);
-			ft_error(2);
+			exit (ft_error(2));
 		}
 		list = list->next;
 	}

@@ -55,7 +55,7 @@ void	ft_numlist_remove_if(t_numlist **begin_list, int num)
 
 int	ft_find_max(t_numlist *list)
 {
-	int ret;
+	int	ret;
 
 	ret = list->content;
 	while (list->next)
@@ -71,7 +71,7 @@ int	ft_find_max(t_numlist *list)
 
 int	ft_find_min(t_numlist *list)
 {
-	int ret;
+	int	ret;
 
 	ret = list->content;
 	while (list->next)
@@ -85,7 +85,7 @@ int	ft_find_min(t_numlist *list)
 	return (ret);
 }
 
-int ft_find_index(t_numlist *list, int data)
+int	ft_find_index(t_numlist *list, int data)
 {
 	int	i;
 

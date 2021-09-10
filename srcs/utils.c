@@ -12,11 +12,18 @@
 
 #include "push_swap.h"
 
+void	ft_free_exit(t_numlist *lista, t_numlist *listb)
+{
+	ft_free_lst(lista);
+	ft_free_lst(listb);
+	exit(-1);
+}
+
 void	ft_free_lst(t_numlist *lst)
 {
 	t_numlist	*pointer;
 
-	while(lst)
+	while (lst)
 	{
 		pointer = lst->next;
 		free(lst);
