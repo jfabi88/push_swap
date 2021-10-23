@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   control.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfabi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/23 11:18:34 by jfabi             #+#    #+#             */
+/*   Updated: 2021/10/23 11:19:50 by jfabi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	ft_is_valid_nmb(char *str, int *j)
@@ -61,63 +73,38 @@ static int	ft_control_int(int argc, char **argv)
 	return (1);
 }
 
-int	ft_control(int argc, char **argv)
+static int	ft_control_first(char *str)
 {
 	char	**mtx;
-	int		num;
 	int		i;
+	int		num;
 
 	i = 0;
+	while (str[i] == ' ')
+		i++;
+	if (str[i] == 0)
+		exit (1);
+	mtx = ft_split(str, ' ');
+	if (mtx == NULL)
+		exit(1);
+	if (mtx)
+		num = ft_control_int(ft_mtx_size(mtx), mtx);
+	ft_free_mtx(mtx);
+	if (num == -1)
+		exit (1);
+	return (1);
+}
+
+int	ft_control(int argc, char **argv)
+{
 	if (argc < 2)
 		exit (1);
-	if (argc == 2)
-	{
-		while (argv[1][i] == ' ')
-			i++;
-		if (argv[1][i] == 0)
-			exit (1);
-		mtx = ft_split(argv[1], ' ');
-		if (mtx == NULL)
-			exit(1);
-		if (mtx)
-			num = ft_control_int(ft_mtx_size(mtx), mtx);
-		ft_free_mtx(mtx);
-		if (num == -1)
-			exit(1);
-		return (1);
-	}
+	else if (argc == 2)
+		ft_control_first(argv[1]);
 	else
 	{
 		if (ft_control_int(argc - 1, argv + 1) == -1)
-			exit(-1);
-		return (1);
+			exit (-1);
 	}
-}
-
-void	ft_double_control(t_numlist *list)
-{
-	t_numlist	*cpy;
-	t_numlist	*start;
-
-	start = list;
-	while (list->next != 0)
-	{
-		cpy = list->next;
-		while (cpy->next != 0)
-		{
-			if (cpy->content == list->content)
-			{
-				ft_free_lst(start);
-				exit(ft_error(2));
-			}
-			cpy = cpy->next;
-		}
-		if (cpy->content == list->content)
-		{
-			ft_free_lst(start);
-			exit (ft_error(2));
-		}
-		list = list->next;
-	}
-	list = start;
+	return (1);
 }

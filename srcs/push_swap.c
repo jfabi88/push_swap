@@ -6,11 +6,39 @@
 /*   By: jfabi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 11:41:02 by jfabi             #+#    #+#             */
-/*   Updated: 2021/05/19 11:41:04 by jfabi            ###   ########.fr       */
+/*   Updated: 2021/10/23 11:18:20 by jfabi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	ft_double_control(t_numlist *list)
+{
+	t_numlist	*cpy;
+	t_numlist	*start;
+
+	start = list;
+	while (list->next != 0)
+	{
+		cpy = list->next;
+		while (cpy->next != 0)
+		{
+			if (cpy->content == list->content)
+			{
+				ft_free_lst(start);
+				exit(ft_error(2));
+			}
+			cpy = cpy->next;
+		}
+		if (cpy->content == list->content)
+		{
+			ft_free_lst(start);
+			exit (ft_error(2));
+		}
+		list = list->next;
+	}
+	list = start;
+}
 
 static int	ft_isorder(t_numlist *list)
 {
@@ -45,7 +73,7 @@ int	main(int argc, char **argv)
 	if (ft_isorder(lista) == 1)
 	{
 		ft_free_exit(lista, listb);
-		return(1);
+		return (1);
 	}
 	size = ft_numlist_size(lista);
 	if (size >= 2 && size <= 5)
